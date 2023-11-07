@@ -11,7 +11,7 @@ num_train: 320000
 speech_len: 96000
 
 # server setting
-cuda_ids: '2'
+cuda_ids: '1'
 batch_size: 8
 num_workers: 8
 
@@ -27,14 +27,14 @@ workspace: 'CRN'
 #tr_snr: [ -5, -4, -3, -2, -1, 0 ]
 
 
-# environment parameter  61
-speech_file: '/data01/zhaofei/home/data/WSJ_datasets/long_wav_same_as_wang.bin'
-noise_file: '/data01/zhaofei/home/data/enhancement_data_wsj0si84/enhancement_data/long_wav.bin'
-eval_file: '/data01/zhaofei/home/data/WSJ_datasets/WSJ0_test_samps/test_ADTbabble_snr-5_unseen.samp'
-test_path: '/data01/zhaofei/home/data/WSJ_datasets/WSJ0_test_samps/'
+# environment parameter  61 /data01/zhaofei/data/CRN_data/long_wav.bin
+speech_file: '/data01/zhaofei/data/CRN_data/WSJ_datasets/long_wav_same_as_wang.bin'
+noise_file: '/data01/zhaofei/data/CRN_data/long_wav.bin'
+eval_file: '/data01/zhaofei/data/CRN_data/WSJ_datasets/WSJ0_test_samps/test_ADTbabble_snr-5_unseen.samp'
+test_path: '/data01/zhaofei/data/CRN_data/WSJ_datasets/WSJ0_test_samps/'
 #train_lst: '/data_zkh/data_environment/tr_si84.mat'
 #cv_lst: '/home/imu_speech2/zhangkanghao/se-code/Model/scps/cv_wsj.scp'
-output_dir: '/data01/zhaofei/data/CRN_data/hfy/result'
+output_dir: '/data01/zhaofei/data/CRN_data/hyf/result'
 tr_snr: [ -5, -4, -3, -2, -1, 0 ]
 
 
