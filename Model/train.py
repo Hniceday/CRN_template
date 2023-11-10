@@ -51,7 +51,7 @@ class Model(object):
         # set model and optimizer
         network = Net()
         network = network.cuda()
-        parameters = sum(p.numel() for p in network.parameters() if p.requires_grad)
+        parameters = sum(p.numel() for p in network.parameters() if p.requires_grad)    # 计算总参数量
         print("Trainable parameters : " + str(parameters))
         optimizer = Adam(network.parameters(), lr=args.lr, amsgrad=True)
         torch_stft = STFT(args.frame_size, args.frame_shift).cuda()
@@ -319,18 +319,20 @@ class Model(object):
 
 if __name__ == '__main__':
     # loading argument
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser()  # 创建一个解析器——创建 ArgumentParser() 对象
+    # 添加参数
     parser.add_argument("-m", "--resume_model", help="trained model name, retrain if no input", default='none')
     parser.add_argument("-i", "--input_path", help="The input path for local test files", default='none')
     parser.add_argument("-o", "--output_path", help="The output path for local test files", default='none')
     parser.add_argument("-r", "--run_mode", default=None)
+    # 解析参数
     outer_arg = parser.parse_args()
 
     # loading config
-    _abspath = Path(os.path.abspath(__file__)).parent
+    _abspath = Path(os.path.abspath(__file__)).parent    # 获得当前文件的父目录
     with open('config.yaml', 'r') as f_yaml:
-        config = yaml.load(f_yaml, Loader=yaml.FullLoader)
-    config['project'] = _abspath.parent.stem
+        config = yaml.load(f_yaml, Loader=yaml.FullLoader)  # load yaml config file
+    config['project'] = _abspath.parent.stem                # there usu 'stem' can get a directory name not a path
     # config['workspace'] = _abspath.stem
     config['resume_model'] = outer_arg.resume_model
 

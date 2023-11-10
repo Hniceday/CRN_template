@@ -21,4 +21,4 @@ class ConfigArgs(object):
         # est dir
         self.validation_path = self.outpt_path + 'est_validations/'
         self.prediction_path = self.outpt_path + 'est_predictions/'
-        makedirs([self.model_path, self.validation_path, self.prediction_path])
+        makedirs([self.model_path, self.validation_path, self.prediction_path]) # create this directory

@@ -20,10 +20,11 @@ class STFT(nn.Module):
         self.register_parameter('win', win)
 
         fourier_basis = np.fft.fft(np.eye(self.win_size))
-        fourier_basis_r = np.real(fourier_basis).astype(np.float32)
-        fourier_basis_i = np.imag(fourier_basis).astype(np.float32)
+        fourier_basis_r = np.real(fourier_basis).astype(np.float32)  # 实部
+        fourier_basis_i = np.imag(fourier_basis).astype(np.float32)  # 虚部
 
-        self.register_buffer('fourier_basis_r', torch.from_numpy(fourier_basis_r))
+        self.register_buffer('fourier_basis_r',
+                             torch.from_numpy(fourier_basis_r))  # torch.from_numpy()将numpy类型转化为tensor类型，并且他们是共享空间的。
         self.register_buffer('fourier_basis_i', torch.from_numpy(fourier_basis_i))
 
         idx = torch.tensor(range(self.win_size // 2 - 1, 0, -1), dtype=torch.long)

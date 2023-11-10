@@ -13,7 +13,8 @@ class TrainDataset(Dataset):
         self.args = args
         # noise
         self.f = open(args.noise_file, 'r+b')
-        self.mm = mmap.mmap(self.f.fileno(), 0)
+        # mmap.mmap(self.f_wav.fileno(), 0)将使用文件描述符进行内存映射，以便可以在内存中对文件进行操作，而不是通过传统的文件读写方式
+        self.mm = mmap.mmap(self.f.fileno(), 0)  # fileno()方法返回与该文件对象关联的文件描述符。
         self.len_noise = len(self.mm) // 4
         # speech
         self.f_wav = open(args.speech_file, 'r+b')
