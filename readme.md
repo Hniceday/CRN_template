@@ -8,3 +8,5 @@
 - python=3.8.8
 - requirements.txt
 - pytorch=1.8.1
+### 3.train
+- python train.py -r train
