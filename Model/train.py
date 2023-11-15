@@ -16,7 +16,9 @@ from networks import Net
 from criteria import LossFunction
 from dataloader import TrainDataset, TrainDataLoader, EvalDataset, EvalDataLoader
 from pystoi import stoi
-from pypesq import pesq # 和matlab有0.005左右的差距  pip install https://github.com/vBaiCai/python-pesq/archive/master.zip
+from pypesq import pesq  # 和matlab有0.005左右的差距  pip install https://github.com/vBaiCai/python-pesq/archive/master.zip
+import pdb
+
 # import wandb
 
 sys.path.append(str(Path(os.path.abspath(__file__)).parent.parent))
@@ -42,7 +44,6 @@ class Model(object):
         #     "epochs": args.max_epoch,
         #     "batch_size": args.batch_size
         # }
-
         tr_mix_dataset = TrainDataset(args)
         tr_batch_dataloader = TrainDataLoader(tr_mix_dataset, args.batch_size, True, workers_num=args.num_workers)
         cv_mix_dataset = EvalDataset(args, args.eval_file)
@@ -51,7 +52,7 @@ class Model(object):
         # set model and optimizer
         network = Net()
         network = network.cuda()
-        parameters = sum(p.numel() for p in network.parameters() if p.requires_grad)    # 计算总参数量
+        parameters = sum(p.numel() for p in network.parameters() if p.requires_grad)  # 计算总参数量
         print("Trainable parameters : " + str(parameters))
         optimizer = Adam(network.parameters(), lr=args.lr, amsgrad=True)
         torch_stft = STFT(args.frame_size, args.frame_shift).cuda()
@@ -329,10 +330,11 @@ if __name__ == '__main__':
     outer_arg = parser.parse_args()
 
     # loading config
-    _abspath = Path(os.path.abspath(__file__)).parent    # 获得当前文件的父目录
+    _abspath = Path(
+        os.path.abspath(__file__)).parent  # 获得当前文件的父目录，os.path.abspath(__file__)获得当前file的绝对路径，这里使用Path主要是想获得其parent
     with open('config.yaml', 'r') as f_yaml:
         config = yaml.load(f_yaml, Loader=yaml.FullLoader)  # load yaml config file
-    config['project'] = _abspath.parent.stem                # there usu 'stem' can get a directory name not a path
+    config['project'] = _abspath.parent.stem  # there usu 'stem' can get a directory name not a path
     # config['workspace'] = _abspath.stem
     config['resume_model'] = outer_arg.resume_model
 

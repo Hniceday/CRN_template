@@ -7,6 +7,7 @@ from utils.util import makedirs
 
 class ConfigArgs(object):
     def __init__(self, config):
+        # self.__dict__ 会以字典的格式储存这里面的self.xxx的属性
         names = self.__dict__
         for k, v in config.items():
             names[k] = v
@@ -21,4 +22,4 @@ class ConfigArgs(object):
         # est dir
         self.validation_path = self.outpt_path + 'est_validations/'
         self.prediction_path = self.outpt_path + 'est_predictions/'
-        makedirs([self.model_path, self.validation_path, self.prediction_path]) # create this directory
+        makedirs([self.model_path, self.validation_path, self.prediction_path])  # create this directory

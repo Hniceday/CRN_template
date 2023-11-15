@@ -11,9 +11,9 @@ num_train: 320000
 speech_len: 96000
 
 # server setting
-cuda_ids: '1'
+cuda_ids: '0'
 batch_size: 4
-num_workers: 0
+num_workers: 0  # debug this is must set 0
 
 workspace: 'CRN'
 
